@@ -1,6 +1,7 @@
 package dev.bug.tinkoffservice.controller;
 
 import dev.bug.tinkoffservice.model.Stock;
+import dev.bug.tinkoffservice.model.StockPrice;
 import dev.bug.tinkoffservice.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,10 @@ public class StockController {
     @GetMapping("/stocks")
     public ResponseEntity<List<Stock>> getStocks(@RequestParam List<String> tickers) {
         return ResponseEntity.ok(stockService.getStocksByTickers(tickers));
+    }
+
+    @GetMapping("/prices")
+    public ResponseEntity<List<StockPrice>> getPrices(@RequestParam List<String> figies) {
+        return ResponseEntity.ok(stockService.getPrices(figies));
     }
 }

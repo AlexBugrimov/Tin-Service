@@ -2,8 +2,10 @@ package dev.bug.tinkoffservice.mapper;
 
 import dev.bug.tinkoffservice.model.Currency;
 import dev.bug.tinkoffservice.model.Stock;
+import dev.bug.tinkoffservice.model.StockPrice;
 import org.springframework.stereotype.Component;
 import ru.tinkoff.invest.openapi.model.rest.MarketInstrument;
+import ru.tinkoff.invest.openapi.model.rest.Orderbook;
 
 @Component
 public class StockMapper {
@@ -19,5 +21,9 @@ public class StockMapper {
                 .currency(Currency.valueOf(instrument.getCurrency().getValue()))
                 .source(TINKOFF_SOURCE)
                 .build();
+    }
+
+    public StockPrice toStockPrice(Orderbook orderbook) {
+        return new StockPrice(orderbook.getFigi(), orderbook.getLastPrice().doubleValue());
     }
 }
