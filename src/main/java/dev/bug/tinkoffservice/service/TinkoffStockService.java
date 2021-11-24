@@ -1,6 +1,7 @@
 package dev.bug.tinkoffservice.service;
 
 import dev.bug.tinkoffservice.exception.StockNotFoundException;
+import dev.bug.tinkoffservice.model.Currency;
 import dev.bug.tinkoffservice.model.Stock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class TinkoffStockService implements StockService {
 
+    private static final String TINKOFF_SOURCE = "TINKOFF";
     private final OpenApi openApi;
 
     @Override
@@ -27,6 +29,14 @@ public class TinkoffStockService implements StockService {
         if (instruments.isEmpty()) {
             throw new StockNotFoundException(String.format("Stock %s not found", ticker));
         }
-        return null;
+        MarketInstrument instrument = instruments.get(0);
+        return Stock.builder()
+                .name(instrument.getName())
+                .ticker(instrument.getTicker())
+                .figi(instrument.getFigi())
+                .type(instrument.getType().getValue())
+                .currency(Currency.valueOf(instrument.getCurrency().getValue()))
+                .source(TINKOFF_SOURCE)
+                .build();
     }
 }

@@ -1,14 +1,18 @@
 package dev.bug.tinkoffservice.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 
-@Data
+@Builder
+@Value
+@AllArgsConstructor
 public class Stock {
 
-    private String ticker;
-    private String figi;
-    private String name;
-    private String type;
-    private Currency currency;
-    private String source;
+    String ticker;
+    String figi;
+    String name;
+    String type;
+    Currency currency;
+    String source;
 }
