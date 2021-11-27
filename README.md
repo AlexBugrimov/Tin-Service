@@ -7,3 +7,5 @@
 ```
 http://localhost:8005/swagger-ui.html
 ```
+
+Оригинальное решение: https://github.com/kegisa/TinkoffStockService
